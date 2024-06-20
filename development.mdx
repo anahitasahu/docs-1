@@ -1,98 +1,17 @@
 ---
-title: 'Development'
-description: 'Learn how to preview changes locally'
+title: 'Scopes Guide'
 ---
 
-<Info>
-  **Prerequisite** You should have installed Node.js (version 18.10.0 or
-  higher).
-</Info>
+Rippling Application Partners are required to explicitly provide Rippling with their necessary authorization scopes as part of their application. These scopes are displayed to Rippling customers during the installation process to ensure the transparent authorization of access to their company's information.
 
-Step 1. Install Mintlify on your OS:
+<Note>You may notice that certain fields are not marked as required in the Rippling API documentation. The information returned via these requests will be determined by the level of scopes your access token or API key is entitled to access.</Note>
 
-<CodeGroup>
+If you notice that a particular capability or function that you require is missing, please reach out to partner.support@rippling.com for further assistance.
 
-```bash npm
-npm i -g mintlify
-```
+| Property | Description |
+| -------- | ----------- |
+| company     | 	The parent company scope. This is a prerequisite to any additional company:* scopes, but does not serve as a scope superset. |
+| employee    | 	The parent employee scope. This is a prerequisite to any additional employee:* scopes, but does not serve as a scope superset. |
+| company:read  | Permission to read the company's information. |
 
-```bash yarn
-yarn global add mintlify
-```
-
-</CodeGroup>
-
-Step 2. Go to the docs are located (where you can find `mint.json`) and run the following command:
-
-```bash
-mintlify dev
-```
-
-The documentation website is now available at `http://localhost:3000`.
-
-### Custom Ports
-
-Mintlify uses port 3000 by default. You can use the `--port` flag to customize the port Mintlify runs on. For example, use this command to run in port 3333:
-
-```bash
-mintlify dev --port 3333
-```
-
-You will see an error like this if you try to run Mintlify in a port that's already taken:
-
-```md
-Error: listen EADDRINUSE: address already in use :::3000
-```
-
-## Mintlify Versions
-
-Each CLI is linked to a specific version of Mintlify. Please update the CLI if your local website looks different than production.
-
-<CodeGroup>
-
-```bash npm
-npm i -g mintlify@latest
-```
-
-```bash yarn
-yarn global upgrade mintlify
-```
-
-</CodeGroup>
-
-## Deployment
-
-<Tip>
-  Unlimited editors available under the [Startup
-  Plan](https://mintlify.com/pricing)
-</Tip>
-
-You should see the following if the deploy successfully went through:
-
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: '0.5rem' }} />
-</Frame>
-
-## Troubleshooting
-
-Here's how to solve some common problems when working with the CLI.
-
-<AccordionGroup>
-  <Accordion title="Mintlify is not loading">
-    Update to Node v18. Run `mintlify install` and try again.
-  </Accordion>
-  <Accordion title="No such file or directory on Windows">
-Go to the `C:/Users/Username/.mintlify/` directory and remove the `mint`
-folder. Then Open the Git Bash in this location and run `git clone
-https://github.com/mintlify/mint.git`.
-
-Repeat step 3.
-
-  </Accordion>
-  <Accordion title="Getting an unknown error">
-    Try navigating to the root of your device and delete the ~/.mintlify folder.
-    Then run `mintlify dev` again.
-  </Accordion>
-</AccordionGroup>
-
-Curious about what changed in a CLI version? [Check out the CLI changelog.](/changelog/command-line)
+<Check>If you're a partner seeking answers or encountering difficulties while integrating with Rippling, please contact us at partner.support@rippling.com. Ensure our responses reach you by preventing emails from this address from being filtered into your spam folder.</Check>
