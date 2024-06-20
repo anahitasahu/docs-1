@@ -50,24 +50,14 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Guides",
       "pages": [
-        "introduction",
-        "quickstart",
+        "Scopes Guide",
+        "Installation (OAuth) Guide",
         "development"
       ]
     },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
-      ]
-    },
+    
     {
       "group": "API Documentation",
       "pages": [
