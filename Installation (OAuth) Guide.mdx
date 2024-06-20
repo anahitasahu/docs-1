@@ -1,0 +1,29 @@
+Rippling integrations rely on OAuth 2.0, in which Rippling is the server and your application is the client. At a high-level, Rippling will send the user to your redirect URL with a `?code=<xxx>` parameter when they install your application in Rippling. This provides the authorization that your application will utilize to exchange for access and refresh tokens.
+
+## Requirements
+
+To understand the installation flow requirements expected from apps in the Rippling App Shop, please navigate to [Partner Requirements](https://rippling.stoplight.io/docs/rippling-api/vxklq99t1i3xx-partner-requirements?_ga=2.139182579.130317931.1718918301-1683550397.1718918301).
+
+## The Installation Flow
+To begin, navigate to your Login URL and then navigate to your App Shop Listing URL as your app will not yet be discoverable from the App Shop.
+
+**Please use the following URLs for your apps**
+
+| PURPOSE | URL |
+| -------- | ----------- |
+| Login URL     | https://app.rippling.com |
+| App Shop Listing URL     | 	https://app.rippling.com/app-shop/app/{APPNAME} |
+| App Authorize URL   | 	https://app.rippling.com/apps/PLATFORM/{APPNAME}/authorize
+| API Base URL | https://api.rippling.com |
+| API Token URL | https://api.rippling.com/api/o/token/ |
+
+## Rippling-Initiated App Installation Flow Diagram
+
+<Frame>
+  <img src="/images/14370193-9943-4059-99ef-d9883d55ed91.png" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+
+
+
+  
