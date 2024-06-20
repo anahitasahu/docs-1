@@ -23,6 +23,31 @@ To begin, navigate to your Login URL and then navigate to your App Shop Listing 
   <img src="/images/14370193-9943-4059-99ef-d9883d55ed91.png" style={{ borderRadius: '0.5rem' }} />
 </Frame>
 
+## Initial Redirect
+
+As you go through the setup flow, you will be redirected to the redirect URL that you configured in the **Default Redirect URL** field in your app listing. The following query parameters will be present in the redirect.
+
+| REDIRECT QUERY PARAMETER |DESCRIPTION |
+| -------- | ----------- |
+| code    | OAuth code that can be exchanged for an access token. |
+| buy     | 	A boolean value based on whether the user indicated they are purchasing a new account, or connecting an existing account. |
+| redirect_uri  | The URL on Rippling that the user should be sent back to once the OAuth setup is done.
+
+<Note>**Please note**: Rippling will only use redirect URIs that have already been configured in your app. Rippling will not redirect to any URL that is passed as a parameter.</Note>
+
+Using the code value, your server will be able to get an access token from Rippling.
+
+**NOTE**: Once the user has been redirected from Rippling to your application, the authorization code is valid for 300 seconds. The authorization code must be used to redeem an access token within 300 seconds of the code being issued. If an access token is not redeemed with this authorization code by then, the user will need to Redirect from Rippling again.
+
+Rippling will redirect to your redirect URL with an authorization code. The redirect will look like this:
+```
+https://oauth.pstmn.io/v1/callback?code=kThqQg24SmDr3Z3XV6oo2CgpC03ysS2M&redirect_uri=https%3A%2F%2Fapp.rippling.com%2Fapps%2FPLATFORM%2FPortalTest%2Freturn&buy=false
+```
+The `redirect_uri` is the URL that you must return the user to in Rippling to complete the app installation flow.
+
+If you need to quickly get another authorization code with your test company, you can go directly to the Redirect URL for your app (replace `INSERTAPPNAME` with your app name) and then click the Continue button:
+
+
 
 
 
