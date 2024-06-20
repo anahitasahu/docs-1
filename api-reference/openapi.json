@@ -1,195 +1,266 @@
 {
-  "openapi": "3.0.1",
-  "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
-  "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      }
-    }
-  }
+  "openapi: 3.0.0
+info:
+  title: API Reference
+  version: '1.0'
+  contact:
+    name: Rippling Support
+    email: support@rippling.com
+  license:
+    name: MIT
+  description: |-
+    Using Rippling's API requires either an API key or an access token retrieved from an OAuth exchange. Each is tied to a single Rippling Company.
+
+    If you are a partner building an integration to Rippling,you can use [Rippling's Installation Guide](https://developer.rippling.com/docs/rippling-api/fucwnbc121hiu-installation-guide) to learn how to retrieve an access token to start using Rippling APIs.
+
+    If you are a customer, you can go [here](https://developer.rippling.com/docs/rippling-api/9rw6guf819r5f-introduction-for-customers) to learn create your API keys to start using Rippling APIs.
+
+    ### Using the Interactive Documentation
+
+    Rippling's Documentation Portal allows you to test the API endpoints directly within the documentation. To do so, provide your API key or Access Token as a header parameter with the form Authorization Bearer: Bearer.
+  termsOfService: 'https://app.rippling.com/developer/tos'
+servers:
+  - url: 'https://api.rippling.com'
+    description: Production
+tags:
+  - name: A. Companies
+  - name: B. Employees
+  - name: C. Payroll
+  - name: D. 401k
+  - name: F. Groups
+  - name: G. SAML
+  - name: E. Current User
+  - name: H. ATS
+  - name: I. Application Management
+  - name: J. Reports
+  - name: Deprecated
+paths:
+  /platform/api/companies/current:
+    get:
+      summary: GET Current Company
+      operationId: get-companies
+      description: 'Returns the currently accessible company for the given token. Please note, the returned fields depend on the scopes that are enabled for your access token or API key.'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+              examples:
+                example-1:
+                  value:
+                    id: string
+                    address:
+                      city: string
+                      streetLine1: string
+                      zip: string
+                      country: string
+                      state: string
+                      streetLine2: string
+                    workLocations:
+                      - id: string
+                        nickname: string
+                        address:
+                          city: string
+                          streetLine1: string
+                          zip: string
+                          country: string
+                          state: string
+                          streetLine2: string
+                    primaryEmail: string
+                    phone: string
+                    name: string
+      parameters: []
+      security:
+        - Token: []
+      tags:
+        - A. Companies
+      x-stoplight:
+        id: 5p60h6uqioozm
+    parameters: []
+  /platform/api/departments:
+    get:
+      summary: GET Departments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                description: An array of department objects.
+                items:
+                  $ref: '#/components/schemas/Department'
+              examples:
+                Success:
+                  value:
+                    - name: Sales
+                      id: 62037ae4d482ff8219a73196
+                      parent: 5ec5595ffa9c4e1728118d6f
+                    - name: SMB
+                      id: 609069a5c8e8f044cf44e997
+                      parent: null
+      operationId: get-departments
+      description: Returns a list of departments for the given company.
+      security:
+        - Token: []
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      tags:
+        - A. Companies
+      x-stoplight:
+        id: sl774k0ddr3es
+    parameters: []
+  /platform/api/employees:
+    get:
+      summary: GET Employees
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+              examples:
+                example-1:
+                  value:
+                    - id: string
+                      name: string
+                      firstName: string
+                      lastName: string
+                      employmentType: CONTRACTOR
+                      title: string
+                      gender: MALE
+                      identifiedGender: MALE
+                      department: string
+                      workLocation:
+                        city: string
+                        streetLine1: string
+                        zip: string
+                        country: string
+                        state: string
+                        streetLine2: string
+                      workLocationNickname: string
+                      spokeId: string
+                      endDate: string
+                      roleState: INIT
+                      workEmail: string
+                      manager: string
+                      customFields:
+                        Id: string
+                        type: TEXT
+                        title: string
+                        required: true
+                      workSchedule:
+                        MONDAY:
+                          hours: 8
+                        TUESDAY:
+                          hours: 8
+                        WEDNESDAY:
+                          hours: 8
+                        THURSDAY:
+                          hours: 8
+                        FRIDAY:
+                          hours: 8
+                        SATURDAY:
+                          hours: 0
+                        SUNDAY:
+                          hours: 0
+                      isRemote: true
+      operationId: get-employees
+      security:
+        - Token: []
+      description: |-
+        Retrieves the list of active employees currently provisioned within the application. The fields retrieved depend on the employee scopes that you have access to for your access token or API key. The only guarenteed fields include id, personalEmail, and roleState.
+
+        For optimal performance, ensure pagination is used via our limit and offset parameters. Pagination should be set to a maximum of 100.
+      tags:
+        - B. Employees
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      x-stoplight:
+        id: ebwuc4p5eymu8
+    parameters: []
+  /platform/api/work_locations:
+    get:
+      summary: GET Work Locations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkLocation'
+              examples:
+                example-1:
+                  value:
+                    - nickname: string
+                      address:
+                        city: string
+                        streetLine1: string
+                        zip: string
+                        country: string
+                        state: string
+                        streetLine2: string
+      operationId: get-work_locations
+      description: Returns the list of work locations for a given company.
+      security:
+        - Token: []
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      tags:
+        - A. Companies
+      x-stoplight:
+        id: pqmhoffeo0egu
+    parameters: []
+  /platform/api/custom_fields:
+    get:
+      summary: GET Custom Fields
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomFields'
+              examples:
+                Success:
+                  value:
+                    - type: SELECT
+                      title: What is your race / ethnicity?
+                      caption: null
+                      required: false
+                    - type: SELECT
+                      title: Veteran Status
+                      caption: null
+                      required: false
+                    - type: SELECT
+                      title: What is your Gender?
+                      caption: null
+                      required: false
+                    - type: SELECT
+                      title: Disability Status
+                      caption: null
+                      required: false
+                    - type: SELECT
+                      title: How will this employee be classified for EEO reporting?
+                      caption: null
+                      required: true
+                    - type: NUMBER
+                      title: Data2
+                      caption: null
+                      required: true
+                    - type: DATE
+                      title: Data1
+                      caption: null"
 }
