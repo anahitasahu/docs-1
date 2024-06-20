@@ -1,0 +1,25 @@
+# Scopes Guide
+
+Rippling Application Partners are required to explicitly provide Rippling with their necessary authorization scopes as part of their application. These scopes are displayed to Rippling customers during the installation process to ensure the transparent authorization of access to their company's information.
+
+<Note>You may notice that certain fields are not marked as required in the Rippling API documentation. The information returned via these requests will be determined by the level of scopes your access token or API key is entitled to access.</Note>
+
+If you notice that a particular capability or function that you require is missing, please reach out to partner.support@rippling.com for further assistance.
+
+ SCOPE | DESCRIPTION |
+| -------- | ----------- |
+| company    | The parent company scope. This is a prerequisite to any additional company:* scopes, but does not serve as a scope superset. |
+| employee     | The parent employee scope. This is a prerequisite to any additional employee:* scopes, but does not serve as a scope superset. |
+| company:read   | Permission to read the company's information. |
+company:write    | Permission to write the company's information.|
+| company:activity:read    | Permission to read information regarding the company's activity.  | Permission to read the name the company is using to do business. |
+| company:legalName:read   | Permission to read the company's legal name.|
+| company:address:read    | Permission to read the company's address.  
+
+
+<Check>If you're a partner seeking answers or encountering difficulties while integrating with Rippling, please contact us at partner.support@rippling.com. Ensure our responses reach you by preventing emails from this address from being filtered into your spam folder.</Check>
+
+
+
+
+
