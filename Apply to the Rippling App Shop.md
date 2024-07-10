@@ -1,5 +1,5 @@
 
-### Who is this for?
+### Who is this for??
 
 Organizations that would like to build an app on the Rippling App Shop for all Rippling customers to leverage. This application is not for Rippling customers who would like to build an integration just for their own internal usage.
 
